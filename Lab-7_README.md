@@ -13,9 +13,9 @@ Refer to the previous lab for help with setting up your working directory.
 - Add the following function declaration to your script file (*main.js*).
 
 ```javascript
-function fetchData(){
+function fetchData(url){
     //load the data
-    fetch()
+    fetch(url)
         .then(function(response){
             return response.json();
         })
@@ -28,27 +28,27 @@ function fetchData(){
 
 Last time, we made a simple webpage that linked to data in a *data/* folder. This time, we will be using the fetch API.
 
-> Javascript is a [synchronous](https://www.freecodecamp.org/news/synchronous-vs-asynchronous-in-javascript/), single-threaded language. Since it runs on a single thead, it can only execute one command at a time, meaning other commands need to wait a previous command's execution before running. Retrieving data from a server can be more complicated though, since once the HTTP request is made, JavaScript doesn't know how long the data (potentially on the other side of the world), will take to be retrieved, and will continue to run subsequent commands with or without it. You could go a long time learning and coding in JavaScript without engaging with [synchronicity/asynchronicity](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing), but that would limit you when it comes to dynamically retrieving data to populate something like a web map. The `fetch` method is used to accomodate JavaScript by telling it to continue running *only when the fetched data has been received*.
+> Javascript is a [synchronous](https://www.freecodecamp.org/news/synchronous-vs-asynchronous-in-javascript/), single-threaded language. Since it runs on a single thead, it can only execute one command at a time, meaning other commands need to wait a previous command's execution before running. Retrieving data from a server can be more complicated though, since once the HTTP request is made, JavaScript doesn't know how long the data (potentially on the other side of the world), will take to be retrieved, and will continue to run subsequent commands with or without it. You could go a long time learning and coding in JavaScript without engaging with [synchronicity/asynchronicity](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing), but that would limit you when it comes to dynamically retrieving data to populate something like a web map. The *fetch* method is used to accomodate JavaScript by telling it to continue running *only when the fetched data has been received*.
 
-> You might notice the above code includes `.then` notation, which have to do with [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). Promises allow you to create asynchronous processes in JavaScript, essentially "promising" the main action sequence that there will be a return value from this task at some point, and can result in success or failure. This is *asynchronous JavaScipt*, and has to do with JavaScript's [event loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop), which is a [complex topic](https://www.youtube.com/watch?v=8aGhZQkoFbQ) that is beyond the scope of this lab. For the sake of this exercise though, we are using promises to await the data from GitHub, which could take some time depending on how accessible the server is, how large the dataset is, etc.
+> You might notice the above code includes *.then* notation, which have to do with [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). Promises allow you to create asynchronous processes in JavaScript, essentially "promising" the main action sequence that there will be a return value from this task at some point, and can result in success or failure. This is *asynchronous JavaScipt*, and has to do with JavaScript's [event loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop), which is a [complex topic](https://www.youtube.com/watch?v=8aGhZQkoFbQ) that is beyond the scope of this lab. For the sake of this exercise though, we are using promises to await the data from GitHub, which could take some time depending on how accessible the server is, how large the dataset is, etc.
 
-- Call the `fetchData()` function from within your `loadMap()` function (be mindful of where inside the *loadMap* function you choose to call it!)
+- Call the `fetchData()` function from within your *loadMap()* function (be mindful of where inside the *loadMap* function you choose to call it!)
 
 The sample data you need has been made available on the lab source repo. You will want to pass the url for this dataset to your JS *fetch* method!
 
-- Visit the [URL for the sample data](https://github.com/geog-464/geog-464.github.io/blob/main/Amtrak_Stations.geojson) representing train stations.
-- Click **Raw**. This will give you a link to the actual data, rather than Github's rendering of it.
-- Pass this URL as a string to the fetch method.
+- Visit the [URL for the sample data](https://github.com/brubcam/GEOG-464_Lab-7/blob/main/DATA/data/train-stations.geojson) representing train stations.
+- Click *Raw*. This will give you a link to the actual data, rather than GitHub's rendering of it.
+- Paste the URL as a string to the *fetch* method.
 
-Once you've saved your script and reloaded your web browser, you should see loaded placemarks. That's a lot of placemarks!
+Once you've saved your script and reloaded your web browser, you should see loaded placemarks. That's quite a bit of placemarks!
 
-- 📝 [Q1] Use the [free tileset providers reference](https://leaflet-extras.github.io/leaflet-providers/preview/) to add a new tilelayer of your choice to your map. The new tileset must be selectable from your baselayer selector widget. You should be able to complete this pretty easily since a template is already provided for you.
+**Q1. Use the [free tileset providers reference](https://leaflet-extras.github.io/leaflet-providers/preview/) to add a new tilelayer of your choice to your map.** The new tileset must be selectable from your baselayer selector widget. You should be able to complete this pretty easily since a template is already provided for you.
 
-# Styling our layer(s)
+## Styling our layer(s)
 
-As you've already seen, GeoJSON data can be added to a leaflet map using the [geoJson](https://leafletjs.com/reference.html#geojson) method of the leaflet API (*L*). When referring to the linked documentation, we notice the method also accepts *Options*, which can be passed as additional keyword parameters. Unlike Python though, it's not as intuitive to pass keyword parameters to functions in JS... You can [make it work](https://exploringjs.com/impatient-js/ch_callables.html#named-parameters) however by passing them inside a JS object as an additional second argument...
+As you've already seen, GeoJSON data can be added to a Leaflet map using the [*GeoJSON*](https://leafletjs.com/reference.html#geojson) method of the leaflet API (*L.geoJSON()*). When referring to the linked documentation, we notice the method also accepts *options*, which can be passed as additional keyword parameters. Unlike Python though, it's not as intuitive to pass keyword parameters to functions in JavasScript... You can [make it work](https://exploringjs.com/js/book/ch_callables.html#named-parameters), however, by passing them inside a JS object as an additional second argument...
 
-We will start by passing two built-in *options* recognized by the *geoJson* method: *pointToLayer* and *style* (notice there are others as well such as [filter](https://leafletjs.com/reference.html#geojson-filter)). (1) The *pointToLayer* parameter defines a function to convert GeoJSON points into Leaflet layers. (2) The *style* option will allow us to [style the leaflet layer](https://leafletjs.com/reference.html#path-option). We will pass functions to these options which we will declare elsewhere. 
+We will start by passing two built-in *options* recognized by the *geoJSON* method: *pointToLayer* and *style* (notice there are others as well, such as [*filter*](https://leafletjs.com/reference.html#geojson-filter)). (1) The *pointToLayer* parameter defines a function to convert GeoJSON points into Leaflet layers. (2) The *style* option will allow us to [style the Leaflet layer](https://leafletjs.com/reference.html#path-option). We will pass functions to these options which we will declare elsewhere.
 
 - Add the following JS object as an additional parameter in the *L.geoJson* function call, directly following the *json* argument: `{style: styleAll, pointToLayer: generateCircles}`.
 - Elsewhere in your script file, declare the functions you are calling (use template below):
@@ -73,25 +73,27 @@ function styleAll(feature, latlng) {
 }
 
 ```
-- Save your script and reload your browser to make sure the changes are reflected in your map...
 
-- 📝 [Q2] What is happening in the *styleAll* function? Explain what the *styles* variable is and what it contains, what the conditional statement is doing and what gets returned by the function. Write your answer inside a \<p> tag above your mapdiv.
+- Save your script and reload your browser to make sure the changes are reflected in your map.
 
-Notice you are accessing property found in your GeoJSON data here (accessible from the default *feature* parameter)... what else could you access here? Notice our *generateCircles* function gets passed 2 parameters from [*pointToLayer*](https://leafletjs.com/reference.html#geojson-pointtolayer), and adds a [circleMarker](https://leafletjs.com/reference.html#circlemarker) for every *latlng* (a leaflet object that contains coordinates). You can do a lot with this...
+**Q2. What is happening in the *styleAll* function? Explain what the *styles* variable is and what it contains, what the conditional statement is doing and what gets returned by the function.** Write your answer (and all following text answers) inside a \<p> tag in *div1* of your html file.
 
-- paste a `console.log()` statement at the top of your *styleAll* function so that it prints the ZIP codes and reload your page. You can access the data's ZIP code values inside the feature object... Observe the ZIP codes in your inspector console (you might want to look at the link to your raw data on Github again...)
+Notice you are accessing property found in your GeoJSON data here (accessible from the default *feature* parameter). What else could you access here? Notice our *generateCircles* function gets passed 2 parameters from [*pointToLayer*](https://leafletjs.com/reference.html#geojson-pointtolayer), and adds a [*circleMarker*](https://leafletjs.com/reference.html#circlemarker) for every *latlng* (a Leaflet object that contains coordinates). You can do a lot with this...
 
-- 📝 [Q3] Add a conditional statement to your *styleAll* function that will style the *fillColor* of features containing a Canadian postal code. Use the colour 'cyan' instead of '#fff' for these.
+- paste a `console.log()` statement at the top of your *styleAll* function so that it prints the station IDs and reload your page. You can access the data's attribute values (station ID, name, etc.) inside the feature object (you might want to look at the link to your raw data on GitHub again). Observe the station codes in your inspector console.
 
-# Adding some basic interactivity for data browsing
+**Q3. Add a conditional statement to your *styleAll* function that will style the *fillColor* of features containing a postal code (some are missing them). Use the colour 'cyan' instead of '#fff' for these.**
 
-- We will now add the [onEachFeature](https://leafletjs.com/reference.html#geojson-oneachfeature) parameter to leaflet's *geoJson* method call. This will allow us to add some additional functionality to our geographic features. append the following to your options called from the *L.geoJson* method: `onEachFeature: addPopups`. As you can see, the value passed to *onEachFeature* is a function call we are naming *addPopups*.
-- Declare the *addPopups* as an empty function elsewhere in your script. This function can receive 2 variables from *onEachFeature* which we will refer to as *feature* and *layer* (add these as arguments to your *addPopups* declaration).
-- Inside this function, console.log() both *feature* and *layer* to check what they contain. In your console, explore these objects and their many attributes...
+## Adding some basic interactivity for data browsing
+
+- We will now add the [*onEachFeature*](https://leafletjs.com/reference.html#geojson-oneachfeature) parameter to Leaflet's *geoJSON* method call. This will allow us to add some additional functionality to our geographic features.
+- Append the following to your options called from the *L.geoJSON()* method: `onEachFeature: addPopups`. As you can see, the value passed to *onEachFeature* is a function call we are naming *addPopups*.
+- Declare `addPopups()` as an empty function elsewhere in your script. This function can receive two variables from *onEachFeature* which we will refer to as *feature* and *layer* (add these as arguments to your *addPopups* declaration).
+- Inside this function, `console.log()` both *feature* and *layer* to see what they contain. In your console, explore these objects and their many attributes...
 
 As you can see, like the other functions we've been adding, you have access to a lot of elements here, which you can refer to or modify freely using JavaScript.
 
-- 📝 [Q4] What is *feature* and what is *layer* here? What do they refer to?
+**Q4. What is *feature* and what is *layer* here? What do they refer to?**
 
 - Add the next few lines inside your *addPopups* function (this is just an exercise):
 ```javascript
@@ -100,17 +102,17 @@ console.log(layer.options.fill)
 console.log(layer.getLatLng())
 ```
 
-- 📝 [Q5] What is the fundamental difference between [*layer.options.fill*](https://leafletjs.com/reference.html#path-fill) and [layer.getLatLng()](https://leafletjs.com/reference.html#marker-getlatlng), beyond the fact that they return different pieces of information?
+**Q5. What is the fundamental difference between [*layer.options.fill*](https://leafletjs.com/reference.html#path-fill) and [*layer.getLatLng()*](https://leafletjs.com/reference.html#marker-getlatlng), beyond the fact that they return different pieces of information?**
 
 - Set *layer.options.fill* to *false* (i.e. `layer.options.fill = false`) and *layer._radius* to *80*.
 
-- 📝 [Q6] Reload your web browser... What happened!?
+**Q6. Reload your web browser. What happened?**
 
 As you can see, you can directly access map elements yourself by knowing your way around these JavaScript objects (in addition, see [object prototypes](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes) for a deeper understanding of JS objects)! Indeed, there are *many* possibilities for elaborate customization here, which you can control more powerfully using your knowledge of programming (conditional statements, looping, etc.). You can use these attributes outside of your map too in your webpage to modify JS, HTML, CSS, SVG, etc.
 
-- Delete all those console.logs you added. Remember that this is our function for adding popups, not for fooling around with styling (even though you could technically do that here since you have access to these elements)!
-- Add the [bindPopup](https://leafletjs.com/reference.html#layer-bindpopup) method to your function, which you can access from the layer object (i.e. paste `layer.bindPopup();`).
-- You can pass anything you like to the bindPopup method, and it will display as a popup on your map features. It's likely that you want to pass some data attributes to it though, which are accessible within both the *feature* and *layer* objects. Pass the station name attribute to this method and reload your web browser. Note that you could also pass additional [popup options](https://leafletjs.com/reference.html#popup-option) to the bindPopup method as well to customize your popups.
+- Delete (or comment out) all those *console.logs* you added. Remember that this is our function for adding popups, not for fooling around with styling (even though you could technically do that here since you have access to these elements)!
+- Add the [`bindPopup`](https://leafletjs.com/reference.html#layer-bindpopup) method to your function, which you can access from the layer object (i.e. paste `layer.bindPopup();`).
+- You can pass anything you like to *bindPopup*, and it will display as a pop-up on your map features. It's likely that you want to pass some data attributes to it though, which are accessible within both the *feature* and *layer* objects. Pass the station name attribute to this method and reload your web browser. Note that you could also pass additional [pop-up options](https://leafletjs.com/reference.html#popup-option) to the `bindPopup` method as well to customize your popups.
 
 # Interactively reloading a map
 
