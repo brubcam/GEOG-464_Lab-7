@@ -38,7 +38,7 @@ Last time, we made a simple webpage that linked to data in a *data/* folder. Thi
 
 The sample data you need has been made available on the lab source repo. You will want to pass the url for this dataset to your JS *fetch* method!
 
-- Visit the [URL for the sample data](https://github.com/brubcam/GEOG-464_Lab-7/blob/main/DATA/data/train-stations.geojson) representing train stations.
+- Visit the [URL for the sample data](https://github.com/brubcam/GEOG-464_Lab-7/blob/main/DATA/train-stations.geojson) representing train stations.
 - Click *Raw*. This will give you a link to the actual data, rather than GitHub's rendering of it.
 - Paste the URL as a string to the *fetch* method.
 
@@ -137,7 +137,7 @@ In this example, we will start by simply hardcoding it into our HTML as a simple
 - Since we are now launching our map using interactivity, you might want to comment out/remove *window.onload* in the JS file.
 - Reload your web browser and select from your dropdown, does a map load?
 - As you can see in the code above, you are now passing a parameter to *loadMap()*, so you should probably give this function declaration a parameter. Calling this variable *mapid* would make sense. Make sure to `console.log()` *mapid* inside your *loadMap* function to make sure it's getting passed in properly.
-- Now, create a conditional statement that checks whether *mapid* is equal to *mapa* or *mapb*. Depending on which one it is, you will load a map using different options (center, zoom, maxZoom, etc.), and call *fetchData()* using a different dataset (use a link to the train stations for *mapa* and to *[megacities.geojson](https://github.com/brubcam/GEOG-464_Lab-7/blob/main/DATA/data/megacities.geojson)* for mapb!) Make sure that the map settings are coherent with the extents and scales of these different datasets.
+- Now, create a conditional statement that checks whether *mapid* is equal to *mapa* or *mapb*. Depending on which one it is, you will load a map using different options (center, zoom, maxZoom, etc.), and call *fetchData()* using a different dataset (use a link to the train stations for *mapa* and to *[megacities.geojson](https://github.com/brubcam/GEOG-464_Lab-7/blob/main/DATA/megacities.geojson)* for mapb!) Make sure that the map settings are coherent with the extents and scales of these different datasets.
 - Everything may seem to be working, but there's still an issue: loading a new Leaflet map with an existing Leaflet map instance already loaded could be problematic. You might therefore need to remove any existing map instances before loading a new one (this allows for the user to continuously switch between map load options). Observe the following code: you can use this code and embed your previous conditional statements inside it:
 
 ```javascript
