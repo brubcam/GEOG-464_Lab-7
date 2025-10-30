@@ -6,9 +6,9 @@ In addition to becoming more familiar with JS objects and the Leaflet API, this 
 
 ## Getting started
 
-There is less guidance in this lab, so you are encouraged to follow tips closely, use documentation, and take more initiative in your coding practice. Note that as a final step, you will need to upload the website files as a GitHub repository and publish as a [public GitHub page](https://docs.github.com/en/pages/quickstart). If you haven't done so already, sign up for a GitHub account, then [create a public repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) for this lab.
+There is less guidance in this lab, so you are encouraged to follow tips closely, use documentation, and take more initiative in your coding practice. Note that as a final step, you will need to upload the website files as a GitHub repository and publish as a [public GitHub page](https://docs.github.com/en/pages/quickstart). If you haven't done so already, sign up for a GitHub account, then [create a public repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) for this lab.
 
-You can choose to read the contents of this lab on my GitHub repository (as you are likely doing now), or to download the repository and open the README in VS Code if you prefer. You can do this by going to the *Code* drop-down and clicking *Download ZIP*. You can then decompress the folder and have local access to all the files in this lab. You could conversely choose to download individual files from the repository by clicking on them, then clicking the download button.
+You can choose to read the contents of this lab on my GitHub repository (as you are likely doing now), or to download the repo and open the README in VS Code if you prefer. You can do this by going to the *Code* drop-down and clicking *Download ZIP*. You can then decompress the folder and have local access to all the files in this lab. You could conversely choose to download individual files from the repository by clicking on them, then clicking the download button.
 
 Get started by creating a working directory for this lab (i.e. a 'Lab-7' folder), if you haven't done so already. Then, download and decompress the Lab-7_DOWNLOADME.zip folder from my repository (or find it within the zip of the entire repo you've already downloaded), and move its contents into your lab working directory. The base website files (*index.html*, *main.js* and *styles.css*) within should already be in their respective folders. I have also included the Leaflet library (in the */lib* folder), which you downloaded for yourself in the previous lab. Refer to the previous lab for more info on setting up your working directory.
 
@@ -40,7 +40,7 @@ Last time, we made a simple webpage that linked to data in a *data/* folder. Thi
 
 The sample data you need has been made available on the lab source repo. You will want to pass the url for this dataset to your JS *fetch* method!
 
-- Visit the [URL for the sample data](https://github.com/brubcam/GEOG-464_Lab-7/blob/main/DATA/train-stations.geojson) representing train stations.
+- Visit the [URL for the sample data](https://github.com/brubcam/GEOG-464_Lab-7/blob/main/DATA/train-stations.geojson) representing train stations, found within the GitHub repo for this lab.
 - Click *Raw*. This will give you a link to the actual data, rather than GitHub's rendering of it.
 - Paste the URL as a string to the *fetch* method.
 
